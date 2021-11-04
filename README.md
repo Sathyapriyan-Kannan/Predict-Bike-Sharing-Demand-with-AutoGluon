@@ -1,61 +1,54 @@
-# Predict Bike Sharing Demand with AutoGluon
+# Report: Predict Bike Sharing Demand with AutoGluon Solution
+#### Sathyapriyan Kannan
 
-## AWS Machine Learning Engineer Nanodegree
+## Initial Training
+### What did you realize when you tried to submit your predictions? What changes were needed to the output of the predictor to submit your results?
+Kaggle doesn't accept the values which are less than 0. So, I converted the negative values to 0 and submitted the results. 
 
-## Overview
-In this project, students will apply the knowledge and methods they learned in the Introduction to Machine Learning course to compete in a Kaggle competition using the AutoGluon library.
+### What was the top ranked model that performed?
+Weighted Ensemble L3 is the model that performed well. Upon adding additional features of date, month and year, the performance improved drastically.
 
-Students will create a Kaggle account if they do not already have one, download the Bike Sharing Demand dataset, and train a model using AutoGluon. They will then submit their initial results for a ranking.
+## Exploratory data analysis and feature creation
+### What did the exploratory analysis find and how did you add additional features?
+Upon Exploratory Data Analysis, I inferred the following:
+1. The features - Season and Weather are categorical.
+2. The features - holiday and working day are binary values. 
+3. Datetime is a datetime object, and it is transformed to 3 different features - day, month, year, hour, weekday.
 
-After they complete the first workflow, they will iterate on the process by trying to improve their score. This will be accomplished by adding more features to the dataset and tuning some of the hyperparameters available with AutoGluon.
+### How much better did your model preform after adding additional features and why do you think that is?
+After adding additional features, the accuracy of the model is increased significantly. This is because the new features are strongly correlated to the target. 
 
-Finally they will submit all their work and write a report detailing which methods provided the best score improvement and why. A template of the report can be found [here](report-template.md).
+## Hyper parameter tuning
+### How much better did your model preform after trying different hyper parameters?
+After, trying out different parameters, I did notice that the performance of the model is changed. The model with the hyperperameters and new features performs more or less same as the one without hyperperameter configurations.   
 
-To meet specifications, the project will require at least these files:
-* Jupyter notebook with code run to completion
-* HTML export of the jupyter notebbook
-* Markdown or PDF file of the report
+### If you were given more time with this dataset, where do you think you would spend more time?
+1. I could spend some time more on EDA and see if I could derive new features to improve the model's prediction.
+2. I could also send time on tuning the hyper parameters. 
 
-Images or additional files needed to make your notebook or report complete can be also added.
+### Create a table with the models you ran, the hyper parameters modified, and the kaggle score.
 
-## Getting Started
-* Clone this template repository `git clone git@github.com:udacity/nd009t-c1-intro-to-ml-project-starter.git` into AWS Sagemaker Studio (or local development).
+| Model             | initial     | new_features| hpo         | hpo2        | 
+| -----------       | ----------- | ----------- | -----       | ----------- |  
+| num_epochs        | default     | default     | 10          | 20          |  
+| num_boost_round   | default     | default     | 100         | 200         |  
+| time              | 600         | 600         | 600         | 600         | 
+| score             | -114.853277 | -32.339708  | -39.010497  | -36.742658  |
 
-<img src="img/sagemaker-studio-git1.png" alt="sagemaker-studio-git1.png" width="500"/>
-<img src="img/sagemaker-studio-git2.png" alt="sagemaker-studio-git2.png" width="500"/>
+### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
-* Proceed with the project within the [jupyter notebook](project-template.ipynb).
-* Visit the [Kaggle Bike Sharing Demand Competition](https://www.kaggle.com/c/bike-sharing-demand) page. There you will see the overall details about the competition including overview, data, code, discussion, leaderboard, and rules. You will primarily be focused on the data and ranking sections.
+![model_train_score.png](img/model_train_score.png)
 
-### Dependencies
+### Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.
 
-```
-Python 3.7
-MXNet 1.8
-Pandas >= 1.2.4
-AutoGluon 0.2.0 
-```
+![model_test_score.png](img/model_test_score.png)
 
-### Installation
-For this project, it is highly recommended to use Sagemaker Studio from the course provided AWS workspace. This will simplify much of the installation needed to get started.
-
-For local development, you will need to setup a jupyter lab instance.
-* Follow the [jupyter install](https://jupyter.org/install.html) link for best practices to install and start a jupyter lab instance.
-* If you have a python virtual environment already installed you can just `pip` install it.
-```
-pip install jupyterlab
-```
-* There are also docker containers containing jupyter lab from [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html).
-
-## Project Instructions
-
-1. Create an account with Kaggle.
-2. Download the Kaggle dataset using the kaggle python library.
-3. Train a model using AutoGluon’s Tabular Prediction and submit predictions to Kaggle for ranking.
-4. Use Pandas to do some exploratory analysis and create a new feature, saving new versions of the train and test dataset.
-5. Rerun the model and submit the new predictions for ranking.
-6. Tune at least 3 different hyperparameters from AutoGluon and resubmit predictions to rank higher on Kaggle.
-7. Write up a report on how improvements (or not) were made by either creating additional features or tuning hyperparameters, and why you think one or the other is the best approach to invest more time in.
-
-## License
-[License](LICENSE.txt)
+## Summary
+With this assignment I aimed solving a regression problem to predict the bike sharing demand, given the historical data.
+Framework used - AutoGluon 
+The initial model was built with the default predictor and the model doesn't perform great. 
+With Exploratory Data Analysis, assigned right data types for the features and with feature engineering, created new features based on the date time.
+With the new features, the performance of the model is drastically increased.
+Hyper parameter tuning is also done to improve the performance but that did not yield better results as of now.
+The final Submission is made to Kaggle and obtained a score of 0.453  [RMSE]
+The model with new features is found to be performing better. 
