@@ -8,7 +8,7 @@ This project is a part of the Assessment in the Udacity's AWS Machine Learning E
 
 ## Getting Started
 
-* Proceed with the project within the [jupyter notebook](Prediction of Bike Sharing Demand with AutoGluon.ipynb).
+* Proceed with the project within the [jupyter notebook](Prediction%20of%20Bike%20Sharing%20Demand%20with%20AutoGluon.ipynb).
 * Visit the [Kaggle Bike Sharing Demand Competition](https://www.kaggle.com/c/bike-sharing-demand) page.
 
 ### Dependencies
